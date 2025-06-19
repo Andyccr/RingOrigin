@@ -169,6 +169,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
     */
     out << "</style>\n";
+    out << "<script type=\"module\" src=\"dark-mode.js\"></script>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>" << title << "</h1>\n";
@@ -303,6 +304,8 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "</style>\n";
 
     */
+
+    out << "<script type=\"module\" src=\"dark-mode.js\"></script>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>Andy's Blog</h1>\n";
@@ -362,6 +365,8 @@ int main() {
         
         std::vector<BlogPost> posts;
 
+
+
         if (fs::exists("styles.css")) {
             fs::copy("styles.css", "output/styles.css", fs::copy_options::overwrite_existing);
             std::cout << "Copied: styles.css -> output/styles.css" << std::endl;
@@ -369,6 +374,14 @@ int main() {
             std::cerr << "Warning: styles.css not found in current directory" << std::endl;
         }
 
+        if (fs::exists("dark.js")) {
+            fs::copy("dark.js", "output/dark.js", fs::copy_options::overwrite_existing);
+            std::cout << "Copied: dark.js -> output/dark.js" << std::endl;
+        } else {
+            std::cerr << "Warning: dark.js not found in current directory" << std::endl;
+        }
+
+        
         
         // 遍历posts目录下的所有.md文件
         for (const auto& entry : fs::directory_iterator("posts")) {

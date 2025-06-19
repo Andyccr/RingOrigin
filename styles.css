@@ -29,3 +29,12 @@ a:hover { text-decoration: underline; }
 }
 #loadMore:hover { background: #2980b9; }
 .hidden-post { display: none; }
+@media (prefers-color-scheme: dark) {
+  body:not(.light-mode) {
+    background: #121212;
+    color: #e0e0e0;
+  }
+  body:not(.light-mode) h1 { color: #f5f5f5; }
+  body:not(.light-mode) a { color: #5dade2; }
+  body:not(.light-mode) .post-date { color: #b3b3b3; }
+}
