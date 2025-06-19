@@ -130,6 +130,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << "<html>\n";
     out << "<head>\n";
     out << "<meta charset=\"UTF-8\">\n";
+    out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     out << "<title>" << title << "</title>\n";
     out << "<style>\n";
     out << "body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }\n";
@@ -145,7 +146,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << "<body>\n";
     out << "<h1>" << title << "</h1>\n";
     out << postDatenext << "\n";
-    out << "\n";
+    out << "<br>";
     out << content << "\n";
     out << "</body>\n";
     out << "</html>\n";
@@ -158,7 +159,9 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "<html>\n";
     out << "<head>\n";
     out << "<meta charset=\"UTF-8\">\n";
+    out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     out << "<title>Andy's Blog</title>\n";
+    /*
     out << "<style>\n";
     out << "body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }\n";
     out << "h1 { color: #2c3e50; }\n";
@@ -168,9 +171,37 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << ".post-item { margin-bottom: 15px; }\n";
     out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
     out << "</style>\n";
+    */
+    out << "<style>\n";
+    out << "body {\n";
+    out << "    transition: all 0.3s ease;\n";
+    out << "    font-family: Arial, sans-serif;\n"; 
+    out << "    line-height: 1.6;\n"; 
+    out << "    max-width: 800px;\n"; 
+    out << "    margin: 0 auto;\n"; 
+    out << "    padding: 20px;\n";
+    out << "}\n";
+    out << "h1 { color: #2c3e50; }\n";
+    out << "a { color: #3498db; text-decoration: none; }\n";
+    out << "a:hover { text-decoration: underline; }\n";
+    out << ".post-list { list-style: none; padding: 0; }\n";
+    out << ".post-item { margin-bottom: 15px; }\n";
+    out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
+    out << ".dark { background: #121212; color: #e0e0e0; }\n";
+    out << ".dark h1 { color: #f5f5f5; }\n";
+    out << ".dark a { color:rgb(52, 152, 219); }\n";
+    out << ".dark .post-date { color: #b3b3b3; }\n";
+    out << "</style>\n";
+
+
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>Andy's Blog</h1>\n";
+    out << "<p style=\"font-family: 'Times New Roman', serif;\">Stay hungry, stay foolish</p>" ;
+
+    out << "<button onclick=\"document.body.classList.toggle('dark')\">Change theme</button>\n";
+
+
     out << "<ul class=\"post-list\">\n";
     
     for (const auto& post : posts) {
@@ -185,6 +216,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     
     out << "</ul>\n";
     out << "</body>\n";
+    out << "©2019-2025 <a href=\"http://andychen.net/\">Andy</a>" ;
     out << "</html>\n";
 }
 
@@ -198,7 +230,7 @@ std::string timeToString(std::time_t time) {
 int main() {
     try {
         // 创建输出目录
-        fs::create_directory("root");
+        fs::create_directory("output");
         
         std::vector<BlogPost> posts;
         
@@ -224,7 +256,7 @@ int main() {
                 // 转换并生成HTML
                 generateHtml(title, postDatenext,
                             markdownToHtml(markdownContent), 
-                            "root/" + htmlFilename);
+                            "output/" + htmlFilename);
                 
                 // 保存文章信息用于生成索引
                 posts.push_back({

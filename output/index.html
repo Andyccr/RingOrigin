@@ -2,19 +2,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Andy's Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Andy's Blog</title>
 <style>
-body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
+body {
+    transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
 h1 { color: #2c3e50; }
 a { color: #3498db; text-decoration: none; }
 a:hover { text-decoration: underline; }
 .post-list { list-style: none; padding: 0; }
 .post-item { margin-bottom: 15px; }
 .post-date { color: #7f8c8d; font-size: 0.9em; }
+.dark { background: #121212; color: #e0e0e0; }
+.dark h1 { color: #f5f5f5; }
+.dark a { color:rgb(52, 152, 219); }
+.dark .post-date { color: #b3b3b3; }
 </style>
 </head>
 <body>
 <h1>Andy's Blog</h1>
+<p style="font-family: 'Times New Roman', serif;">Stay hungry, stay foolish</p><button onclick="document.body.classList.toggle('dark')">Change theme</button>
 <ul class="post-list">
 <li class="post-item">
 <a href="hello-world.html">Hello World</a>
@@ -438,4 +450,4 @@ a:hover { text-decoration: underline; }
 </li>
 </ul>
 </body>
-</html>
+©2019-2025 <a href="http://andychen.net/">Andy</a></html>
