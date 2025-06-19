@@ -10,6 +10,9 @@
 #include <iomanip>
 #include <sstream>
 
+#include <cstdio> // 用于 std::rename
+#include <cstdlib> // 用于 std::system
+
 namespace fs = std::filesystem;
 
 struct BlogPost {
@@ -132,7 +135,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << "<meta charset=\"UTF-8\">\n";
     out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     out << "<title>" << title << "</title>\n";
-
+    /*
     out << "<style>\n";
     out << "body {\n";
     out << "    transition: all 0.3s ease;\n";
@@ -152,6 +155,8 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << ".dark h1 { color: #f5f5f5; }\n";
     out << ".dark a { color:rgb(52, 152, 219); }\n";
     out << ".dark .post-date { color: #b3b3b3; }\n";
+    */
+    out << "<link rel=\"stylesheet\" href=\"styles.css\">\n";
     /*
     out << "<style>\n";
     out << "body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }\n";
@@ -258,6 +263,10 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "<meta charset=\"UTF-8\">\n";
     out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n";
     out << "<title>Andy's Blog</title>\n";
+
+    out << "<link rel=\"stylesheet\" href=\"styles.css\">\n";
+
+    /*
     out << "<style>\n";
     out << "body {\n";
     out << "    transition: all 0.3s ease;\n";
@@ -292,6 +301,8 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "#loadMore:hover { background: #2980b9; }\n";
     out << ".hidden-post { display: none; }\n";
     out << "</style>\n";
+
+    */
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>Andy's Blog</h1>\n";
@@ -350,6 +361,14 @@ int main() {
         fs::create_directory("output");
         
         std::vector<BlogPost> posts;
+
+        if (fs::exists("styles.css")) {
+            fs::copy("styles.css", "output/styles.css", fs::copy_options::overwrite_existing);
+            std::cout << "Copied: styles.css -> output/styles.css" << std::endl;
+        } else {
+            std::cerr << "Warning: styles.css not found in current directory" << std::endl;
+        }
+
         
         // 遍历posts目录下的所有.md文件
         for (const auto& entry : fs::directory_iterator("posts")) {
