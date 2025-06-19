@@ -170,7 +170,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
     */
     out << "</style>\n";
-    out << "<script type=\"module\" src=\"dark-mode.js\"></script>\n";
+    out << "<script type=\"module\" src=\"dark.js\"></script>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>" << title << "</h1>\n";
@@ -306,7 +306,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
 
     */
 
-    out << "<script type=\"module\" src=\"dark-mode.js\"></script>\n";
+    out << "<script type=\"module\" src=\"dark.js\"></script>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>Andy's Blog</h1>\n";
