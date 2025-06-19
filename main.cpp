@@ -132,6 +132,27 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << "<meta charset=\"UTF-8\">\n";
     out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     out << "<title>" << title << "</title>\n";
+
+    out << "<style>\n";
+    out << "body {\n";
+    out << "    transition: all 0.3s ease;\n";
+    out << "    font-family: Arial, sans-serif;\n"; 
+    out << "    line-height: 1.6;\n"; 
+    out << "    max-width: 800px;\n"; 
+    out << "    margin: 0 auto;\n"; 
+    out << "    padding: 20px;\n";
+    out << "}\n";
+    out << "h1 { color: #2c3e50; }\n";
+    out << "a { color: #3498db; text-decoration: none; }\n";
+    out << "a:hover { text-decoration: underline; }\n";
+    out << ".post-list { list-style: none; padding: 0; }\n";
+    out << ".post-item { margin-bottom: 15px; }\n";
+    out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
+    out << ".dark { background: #121212; color: #e0e0e0; }\n";
+    out << ".dark h1 { color: #f5f5f5; }\n";
+    out << ".dark a { color:rgb(52, 152, 219); }\n";
+    out << ".dark .post-date { color: #b3b3b3; }\n";
+    /*
     out << "<style>\n";
     out << "body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }\n";
     out << "h1 { color: #2c3e50; }\n";
@@ -141,10 +162,16 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
     out << ".post-list { list-style: none; padding: 0; }\n";
     out << ".post-item { margin-bottom: 15px; }\n";
     out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
+    */
     out << "</style>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>" << title << "</h1>\n";
+    out << "<br>";
+    out << "<br>";
+    out << "<button onclick=\"document.body.classList.toggle('dark')\">Change theme</button>\n";
+    out << "<br>";
+    out << "<br>\n";
     out << postDatenext << "\n";
     out << "<br>";
     out << content << "\n";
@@ -153,6 +180,7 @@ void generateHtml(const std::string& title, const std::string& postDatenext, con
 }
 
 // 生成索引页面
+/*
 void generateIndex(const std::vector<BlogPost>& posts) {
     std::ofstream out("output/index.html");
     out << "<!DOCTYPE html>\n";
@@ -161,7 +189,8 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "<meta charset=\"UTF-8\">\n";
     out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
     out << "<title>Andy's Blog</title>\n";
-    /*
+    
+
     out << "<style>\n";
     out << "body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }\n";
     out << "h1 { color: #2c3e50; }\n";
@@ -172,6 +201,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
     out << "</style>\n";
     */
+/*
     out << "<style>\n";
     out << "body {\n";
     out << "    transition: all 0.3s ease;\n";
@@ -217,6 +247,93 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "</ul>\n";
     out << "</body>\n";
     out << "©2019-2025 <a href=\"http://andychen.net/\">Andy</a>" ;
+    out << "</html>\n";
+}
+*/
+void generateIndex(const std::vector<BlogPost>& posts) {
+    std::ofstream out("output/index.html");
+    out << "<!DOCTYPE html>\n";
+    out << "<html>\n";
+    out << "<head>\n";
+    out << "<meta charset=\"UTF-8\">\n";
+    out << "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n";
+    out << "<title>Andy's Blog</title>\n";
+    out << "<style>\n";
+    out << "body {\n";
+    out << "    transition: all 0.3s ease;\n";
+    out << "    font-family: Arial, sans-serif;\n"; 
+    out << "    line-height: 1.6;\n"; 
+    out << "    max-width: 800px;\n"; 
+    out << "    margin: 0 auto;\n"; 
+    out << "    padding: 20px;\n";
+    out << "}\n";
+    out << "h1 { color: #2c3e50; }\n";
+    out << "a { color: #3498db; text-decoration: none; }\n";
+    out << "a:hover { text-decoration: underline; }\n";
+    out << ".post-list { list-style: none; padding: 0; }\n";
+    out << ".post-item { margin-bottom: 15px; }\n";
+    out << ".post-date { color: #7f8c8d; font-size: 0.9em; }\n";
+    out << ".dark { background: #121212; color: #e0e0e0; }\n";
+    out << ".dark h1 { color: #f5f5f5; }\n";
+    out << ".dark a { color:rgb(52, 152, 219); }\n";
+    out << ".dark .post-date { color: #b3b3b3; }\n";
+
+
+    out << "#loadMore {\n";
+    out << "    display: block;\n";
+    out << "    margin: 20px auto;\n";
+    out << "    padding: 10px 20px;\n";
+    out << "    background: #3498db;\n";
+    out << "    color: white;\n";
+    out << "    border: none;\n";
+    out << "    border-radius: 4px;\n";
+    out << "    cursor: pointer;\n";
+    out << "}\n";
+    out << "#loadMore:hover { background: #2980b9; }\n";
+    out << ".hidden-post { display: none; }\n";
+    out << "</style>\n";
+    out << "</head>\n";
+    out << "<body>\n";
+    out << "<h1>Andy's Blog</h1>\n";
+    out << "<p style=\"font-family: 'Times New Roman', serif;\">Stay hungry, stay foolish</p>\n";
+    out << "<button onclick=\"document.body.classList.toggle('dark')\">Change theme</button>\n";
+    out << "<ul class=\"post-list\" id=\"postList\">\n";
+    
+    // 显示前10篇文章，其余隐藏
+    for (size_t i = 0; i < posts.size(); ++i) {
+        char dateStr[100];
+        std::strftime(dateStr, sizeof(dateStr), "%Y-%m-%d", std::localtime(&posts[i].postDate));
+        
+        out << "<li class=\"post-item" << (i >= 10 ? " hidden-post" : "") << "\">\n";
+        out << "<a href=\"" << posts[i].filename << "\">" << posts[i].title << "</a>\n";
+        out << "<div class=\"post-date\">" << dateStr << "</div>\n";
+        out << "</li>\n";
+    }
+    
+    out << "</ul>\n";
+    
+    // 如果文章超过10篇，添加"加载更多"按钮
+    if (posts.size() > 10) {
+        out << "<button id=\"loadMore\">Load More</button>\n";
+        out << "<script>\n";
+        out << "let visiblePosts = 10;\n";
+        out << "const posts = document.querySelectorAll('.post-item');\n";
+        out << "const loadMoreBtn = document.getElementById('loadMore');\n";
+        out << "\n";
+        out << "loadMoreBtn.addEventListener('click', () => {\n";
+        out << "    visiblePosts += 10;\n";
+        out << "    for (let i = 0; i < posts.length && i < visiblePosts; i++) {\n";
+        out << "        posts[i].classList.remove('hidden-post');\n";
+        out << "    }\n";
+        out << "    if (visiblePosts >= posts.length) {\n";
+        out << "        loadMoreBtn.style.display = 'none';\n";
+        out << "    }\n";
+        out << "});\n";
+        out << "</script>\n";
+    }
+    
+    out << "©2019-2025 <a href=\"http://andychen.net/\">Andy</a>\n";
+    out << "</body>\n";
     out << "</html>\n";
 }
 
