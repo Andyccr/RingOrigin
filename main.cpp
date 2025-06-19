@@ -224,7 +224,7 @@ int main() {
                 // 转换并生成HTML
                 generateHtml(title, postDatenext,
                             markdownToHtml(markdownContent), 
-                            "output/" + htmlFilename);
+                            "root/" + htmlFilename);
                 
                 // 保存文章信息用于生成索引
                 posts.push_back({
