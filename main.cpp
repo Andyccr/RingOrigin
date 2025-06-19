@@ -89,6 +89,15 @@ std::string markdownToHtml(const std::string& markdown) {
                 html += markdown[i++];
             }
             html += "</h2>";
+
+        } else if (!inCodeBlock && markdown.substr(i, 4) == "### ") {
+            html += "<h3>";
+            i += 4;
+            while (i < markdown.size() && markdown[i] != '\n') {
+                html += markdown[i++];
+            }
+            html += "</h3>";
+
         } else if (!inCodeBlock && markdown.substr(i, 2) == "- ") {
             html += "<ul><li>";
             i += 2;
@@ -347,7 +356,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
         out << "</script>\n";
     }
     
-    out << "©2019-2025 <a href=\"http://andychen.net/\">Andy</a>\n";
+    out << "©2019-2025  <a href=\"http://andychen.net/\">Andy</a>\n";
     out << "</body>\n";
     out << "</html>\n";
 }

@@ -19,11 +19,14 @@ date: 2024-10-28T09:53:40+08:00
 ```
 
 下载后(终端操作)：
-
+```
 sudo vim ~/.bash\_profile
-
+```
+```
 export PATH="/opt/homebrew/bin:$PATH"
+```
 
 在:wq保存退出后
-
+```
 source ~/.bash\_profile
+```
