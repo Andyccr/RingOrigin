@@ -198,7 +198,7 @@ std::string timeToString(std::time_t time) {
 int main() {
     try {
         // 创建输出目录
-        fs::create_directory("output");
+        fs::create_directory("root");
         
         std::vector<BlogPost> posts;
         
