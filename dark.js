@@ -1,21 +1,36 @@
-// scripts/dark-mode.js
-function initDarkMode() {
-  // 1. 自动检测系统暗色模式
-  const applySystemTheme = () => {
-    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.body.classList.toggle('dark', isDark);
-  };
+// dark.js
 
-  // 2. 监听系统主题变化
-  window.matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', applySystemTheme);
-
-  // 3. 初始化
-  applySystemTheme();
+/* ========== 最后更新时间功能 ========== */
+function initLastUpdated() {
+  const lastUpdated = document.getElementById('lastUpdated');
+  if (lastUpdated) {
+    lastUpdated.textContent = '最后更新: ' + new Date(document.lastModified).toLocaleString();
+  }
 }
 
-// 导出函数（如果其他脚本需要调用）
-export { initDarkMode };
+/* ========== 暗色模式功能 ========== */
+function initDarkMode() {
+  const isDark = window.matchMedia('(prefers-color-scheme: dark').matches;
+  document.body.classList.toggle('dark', isDark);
+}
 
-// 自动执行（如果不需要模块化）
-// initDarkMode();
+/* ========== 折叠文章功能 ========== 
+
+function initPostCollapse() {
+  document.querySelectorAll('.post-collapse').forEach(button => {
+    button.addEventListener('click', () => {
+      button.nextElementSibling.classList.toggle('hidden');
+    });
+  });
+}
+*/
+
+/* ========== 初始化所有功能 ========== */
+function initAll() {
+  initLastUpdated();
+  initDarkMode();
+  /*initPostCollapse();*/
+}
+
+// 页面加载完成后执行
+document.addEventListener('DOMContentLoaded', initAll);

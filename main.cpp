@@ -315,7 +315,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
 
     */
 
-    out << "<script type=\"module\" src=\"dark.js\"></script>\n";
+    out << "<script src=\"dark.js\"></script>\n";
     out << "</head>\n";
     out << "<body>\n";
     out << "<h1>Andy's Blog</h1>\n";
@@ -355,7 +355,7 @@ void generateIndex(const std::vector<BlogPost>& posts) {
         out << "});\n";
         out << "</script>\n";
     }
-    
+    out << "<div id=\"lastUpdated\" class=\"last-updated\"></div>";
     out << "©2019-2025  <a href=\"http://andychen.net/\">Andy</a>\n";
     out << "</body>\n";
     out << "</html>\n";
