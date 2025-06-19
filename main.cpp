@@ -316,10 +316,10 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     
     // 显示前10篇文章，其余隐藏
     for (size_t i = 0; i < posts.size(); ++i) {
-        char dateStr[100];
+        char dateStr[150];
         std::strftime(dateStr, sizeof(dateStr), "%Y-%m-%d", std::localtime(&posts[i].postDate));
         
-        out << "<li class=\"post-item" << (i >= 10 ? " hidden-post" : "") << "\">\n";
+        out << "<li class=\"post-item" << (i >= 15 ? " hidden-post" : "") << "\">\n";
         out << "<a href=\"" << posts[i].filename << "\">" << posts[i].title << "</a>\n";
         out << "<div class=\"post-date\">" << dateStr << "</div>\n";
         out << "</li>\n";
@@ -328,15 +328,15 @@ void generateIndex(const std::vector<BlogPost>& posts) {
     out << "</ul>\n";
     
     // 如果文章超过10篇，添加"加载更多"按钮
-    if (posts.size() > 10) {
+    if (posts.size() > 15) {
         out << "<button id=\"loadMore\">Load More</button>\n";
         out << "<script>\n";
-        out << "let visiblePosts = 10;\n";
+        out << "let visiblePosts = 15;\n";
         out << "const posts = document.querySelectorAll('.post-item');\n";
         out << "const loadMoreBtn = document.getElementById('loadMore');\n";
         out << "\n";
         out << "loadMoreBtn.addEventListener('click', () => {\n";
-        out << "    visiblePosts += 10;\n";
+        out << "    visiblePosts += 15;\n";
         out << "    for (let i = 0; i < posts.length && i < visiblePosts; i++) {\n";
         out << "        posts[i].classList.remove('hidden-post');\n";
         out << "    }\n";
